@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alfakki Memorial School</title>
+<title>Graduation Images - Alfakki School</title>
 
 <style>
 * {
@@ -12,17 +12,13 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
 }
-a{
-  text-decoration: none;
-  color: black;
+
+body {
+  background: #f5f5f5;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  background: #f5f5f5;
 }
 
 /* NAVBAR */
@@ -38,12 +34,7 @@ body {
   backdrop-filter: blur(10px);
   color: white;
   z-index: 1000;
-  transition: top 0.4s ease;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 20px;
+  transition: top 0.4s;
 }
 
 .menu-toggle {
@@ -55,32 +46,12 @@ body {
 #nav-links {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 20px;
 }
 
-#nav-links li a {
-  text-decoration: none;
+#nav-links a {
   color: white;
-  position: relative;
-}
-
-#nav-links li a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: #00c3ff;
-  left: 0;
-  bottom: -5px;
-  transition: 0.3s;
-}
-
-#nav-links li a:hover::after {
-  width: 100%;
-}
-
-#nav-links li a.active {
-  color: #00c3ff;
+  text-decoration: none;
 }
 
 /* MOBILE NAV */
@@ -95,7 +66,7 @@ body {
     right: -100%;
     width: 75%;
     height: 100vh;
-    background: rgba(10, 42, 67, 0.95);
+    background: rgba(10,42,67,0.95);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -107,30 +78,22 @@ body {
   }
 }
 
-/* HERO */
-.hero {
+/* HEADER */
+.header {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-  url('./photoss/f1.jpg');
-  background-size: cover;
   color: white;
   text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+  url('./photoss/gimg/g4.jpg');
+  background-size: cover;
 }
 
-.typewriter {
-  font-size: 32px;
-  font-weight: bold;
-}
-
-/* SECTIONS */
-section {
-  padding: 80px 20px;
-}
-
+/* SECTION ANIMATION */
 .section {
+  padding: 80px 20px;
   opacity: 0;
   transform: translateY(60px);
   transition: 1s;
@@ -141,273 +104,252 @@ section {
   transform: translateY(0);
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* CARDS */
-.cards {
+/* GALLERY GRID */
+.gallery {
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
-.card {
-  background: white;
-  border-radius: 15px;
+/* IMAGE CARD */
+.image-card {
+  position: relative;
   overflow: hidden;
-  transition: 0.3s;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card img {
+.image-card img {
   width: 100%;
-}
-
-.card h3, .card p {
-  padding: 10px;
-}
-
-/* SIMPLE SECTIONS */
-.simple {
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-}
-/* MEMBER CARD STYLE */
-.member-card {
-  text-align: center;
-  padding-bottom: 15px;
-}
-
-.member-card img {
   height: 250px;
   object-fit: cover;
+  transition: 0.4s;
 }
 
 /* HOVER EFFECT */
-.member-card:hover {
-  transform: translateY(-12px) scale(1.02);
+.image-card:hover img {
+  transform: scale(1.1);
 }
 
-/* NAME STYLE */
-.member-card h3 {
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-/* ROLE STYLE */
-.member-card p {
-  color: #555;
-  font-weight: 500;
-}
-
-/* FOOTER */
-footer {
-  background: #0a2a43;
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.6);
   color: white;
   text-align: center;
-  padding: 20px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.image-card:hover .overlay {
+  opacity: 1;
+}
+
+/* MODAL (LIGHTBOX) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .cards {
+  .gallery {
     grid-template-columns: 1fr;
   }
-  .hero {
-  height: 50vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-  url('./photoss/f1.jpg');
-  background-size: cover;
-  color: white;
-  text-align: center;
-}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav id="navbar">
-  <h2 class="logo">Alfakki</h2>
+  <h2>Alfakki</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <ul id="nav-links">
-    <li><a href="#home">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="videos.html">Videos</a></li>
-    <li><a href="imgs.html">Images</a></li>
+    <li><a href="#images">Images</a></li>
     <li><a href="sellform.html">Buy Form</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <div class="typewriter" id="type"></div>
-</section>
+<!-- HEADER -->
+<div class="header">
+  <h1>Graduation Images</h1>
+</div>
 
-<!-- SECTIONS -->
+<!-- GALLERY -->
 <section class="section">
-  <h2>Our Sections</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="./photoss/f4.jpg">
-      <h3>Secondary</h3>
-      <p>We provide quality secondary education.</p>
+  <div class="gallery">
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g1.jpg">
+      <div class="overlay">Graduation Day</div>
     </div>
-    <div class="card">
-      <img src="./photoss/f2.jpg">
-      <h3>Primary</h3>
-      <p>Strong foundation for young learners.</p>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g2.jpg">
+      <div class="overlay">Students Celebration</div>
     </div>
-    <div class="card">
-      <img src="./photoss/f3.jpg">
-      <h3>Nursery</h3>
-      <p>Safe and fun environment for kids.</p>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g3.jpg">
+      <div class="overlay">Award Moment</div>
     </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g4.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g5.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g6.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g7.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g8.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g9.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g10.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g11.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g12.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g13.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g4.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g5.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g6.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g7.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g8.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g19.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g20.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="./photoss/gimg/g21.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
   </div>
 </section>
 
-<section class="section simple">
-  <h2>Our Vision</h2>
-  <p>To build future leaders with excellence in education.</p>
-</section>
-
-<section class="section simple">
-  <h2>Our Achievements</h2>
-  <p>Multiple awards in academics and competitions.</p>
-</section>
-
-<section class="section simple">
-  <h2>About Us</h2>
-  <p>Alfakki Memorial School is committed to quality education and moral values.</p>
-</section>
-
-<a href="videos.html">
-
-<section id="videos" class="section simple">
-  <h2>Graduation Videos</h2>
-  <p>click here to open...</p>
-</section>
-
-</a>
-
-<a href="imgs.html">
-  
-  <section id="images" class="section simple">
-  <h2>Graduation Images</h2>
-  <p>click here to open...</p>
-</section>
-
-</a>
-
-<a href="sellform.html">
-
-<section id="buy" class="section simple">
-  <h2>Buy Form</h2>
-  <p>click here to buy form</p>
-</section>
-
-</a>
-
-<section class="section">
-  <h2>Our School Members</h2>
-
-  <div class="cards">
-
-    <div class="card member-card">
-      <img src="./photoss/dr.jpg">
-      <h3>Mr. Ibrahim Musa</h3>
-      <p>Director</p>
-    </div>
-
-    <div class="card member-card">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg">
-      <h3>Mrs. Amina Bello</h3>
-      <p>Vice Principal</p>
-    </div>
-
-    <div class="card member-card">
-      <img src="https://randomuser.me/api/portraits/men/55.jpg">
-      <h3>Mr. John Daniel</h3>
-      <p>Head Teacher</p>
-    </div>
-
-    <div class="card member-card">
-      <img src="https://randomuser.me/api/portraits/women/68.jpg">
-      <h3>Miss Fatima Ali</h3>
-      <p>Nursery Teacher</p>
-    </div>
-
-    <div class="card member-card">
-      <img src="https://randomuser.me/api/portraits/men/77.jpg">
-      <h3>Mr. Samuel David</h3>
-      <p>ICT Instructor</p>
-    </div>
-
-    <div class="card member-card">
-      <img src="https://randomuser.me/api/portraits/women/12.jpg">
-      <h3>Mrs. Zainab Abdullahi</h3>
-      <p>Administrator</p>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Alfakki Memorial School</p>
-</footer>
+<!-- MODAL -->
+<div class="modal" id="imageModal">
+  <span class="close-btn" onclick="closeImage()">✖</span>
+  <img id="modalImg">
+</div>
 
 <script>
-// TYPEWRITER
-const text = "Welcome to Alfakki Memorial School";
-let i = 0;
-function typing() {
-  if (i < text.length) {
-    document.getElementById("type").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typing, 50);
-  }
-}
-typing();
-
-// TOGGLE MENU
+// MENU
 function toggleMenu() {
   document.getElementById("nav-links").classList.toggle("active");
 }
 
-// CLOSE MENU
-document.querySelectorAll("#nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.getElementById("nav-links").classList.remove("active");
-  });
-});
-
-// SCROLL NAV
+// NAV SCROLL
 let lastScroll = 0;
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
-  let currentScroll = window.pageYOffset;
-
-  if (currentScroll > lastScroll) {
-    navbar.style.top = "-90px";
-  } else {
-    navbar.style.top = "0";
-  }
-  lastScroll = currentScroll;
+  let current = window.pageYOffset;
+  navbar.style.top = current > lastScroll ? "-90px" : "0";
+  lastScroll = current;
 });
 
 // SCROLL ANIMATION
 const sections = document.querySelectorAll('.section');
-
 window.addEventListener('scroll', () => {
   sections.forEach(sec => {
     const top = sec.getBoundingClientRect().top;
@@ -417,26 +359,15 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ACTIVE LINKS
-const navLinks = document.querySelectorAll("#nav-links a");
+// IMAGE MODAL
+function openImage(el) {
+  document.getElementById("imageModal").classList.add("active");
+  document.getElementById("modalImg").src = el.querySelector("img").src;
+}
 
-window.addEventListener("scroll", () => {
-  let current = "";
-
-  document.querySelectorAll("section").forEach(sec => {
-    const top = sec.offsetTop - 150;
-    if (pageYOffset >= top) {
-      current = sec.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach(a => {
-    a.classList.remove("active");
-    if (a.getAttribute("href").includes(current)) {
-      a.classList.add("active");
-    }
-  });
-});
+function closeImage() {
+  document.getElementById("imageModal").classList.remove("active");
+}
 </script>
 
 </body>
