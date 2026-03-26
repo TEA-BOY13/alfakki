@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graduation Images - Alfakki School</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: rgba(10, 42, 67, 0.7);
+  backdrop-filter: blur(10px);
+  color: white;
+  z-index: 1000;
+  transition: top 0.4s;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+#nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+#nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  .menu-toggle {
+    display: block;
+  }
+
+  #nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: rgba(10,42,67,0.95);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+  }
+
+  #nav-links.active {
+    right: 0;
+  }
+}
+
+/* HEADER */
+.header {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+  url('/photoss//gimg/g4.jpg');
+  background-size: cover;
+}
+
+/* SECTION ANIMATION */
+.section {
+  padding: 80px 20px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* GALLERY GRID */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+}
+
+/* IMAGE CARD */
+.image-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.image-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+/* HOVER EFFECT */
+.image-card:hover img {
+  transform: scale(1.1);
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.image-card:hover .overlay {
+  opacity: 1;
+}
+
+/* MODAL (LIGHTBOX) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <h2>Alfakki</h2>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <ul id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="#images">Images</a></li>
+    <li><a href="sellform.html">Buy Form</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Graduation Images</h1>
+</div>
+
+<!-- GALLERY -->
+<section class="section">
+  <div class="gallery">
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g1.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g2.jpg">
+      <div class="overlay">Students Celebration</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g3.jpg">
+      <div class="overlay">Award Moment</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g4.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g5.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g6.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g7.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g8.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g9.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g10.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g11.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g12.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g13.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g4.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g5.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g6.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g7.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g8.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g19.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g20.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+    <div class="image-card" onclick="openImage(this)">
+      <img src="/photoss//gimg/g21.jpg">
+      <div class="overlay">Graduation Day</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="imageModal">
+  <span class="close-btn" onclick="closeImage()">✖</span>
+  <img id="modalImg">
+</div>
+
+<script>
+// MENU
+function toggleMenu() {
+  document.getElementById("nav-links").classList.toggle("active");
+}
+
+// NAV SCROLL
+let lastScroll = 0;
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+  let current = window.pageYOffset;
+  navbar.style.top = current > lastScroll ? "-90px" : "0";
+  lastScroll = current;
+});
+
+// SCROLL ANIMATION
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      sec.classList.add('show');
+    }
+  });
+});
+
+// IMAGE MODAL
+function openImage(el) {
+  document.getElementById("imageModal").classList.add("active");
+  document.getElementById("modalImg").src = el.querySelector("img").src;
+}
+
+function closeImage() {
+  document.getElementById("imageModal").classList.remove("active");
+}
+</script>
+
+</body>
+</html>
